@@ -46,7 +46,18 @@ public class PlotSquaredHandler
 
     public boolean isAdmin(PlotPlayer<?> plotPlayer)
     {
-        final Player player = getPlayer(plotPlayer.getName());
+        final Player player = getPlayer(plotPlayer);
+        if (player == null)
+        {
+            return false;
+        }
+        return isAdmin(player);
+    }
+
+    public boolean isAdmin(PermissionHolder holder)
+    {
+        if (!(holder instanceof PlotPlayer<?> plotPlayer)) return true;
+        final Player player = getPlayer(plotPlayer);
         if (player == null)
         {
             return false;
